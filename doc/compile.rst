@@ -237,9 +237,9 @@ and add these lines to make the debian package
 `# include (cmake)`
 `include(packaging)`
 
-6. This is the Cmake command:
+6. This is the Cmake command::
 
-`cmake -g DEB ../gerbera -DWITH_NPUPNP=YES -DWITH_JS=1 -DWITH_MYSQL=1 -DWITH_CURL=1 -DWITH_TAGLIB=1 -DWITH_MAGIC=1 -DWITH_MATROSKA=0 -DWITH_AVCODEC=1 -DWITH_EXIF=1 -DWITH_EXIV2=0 -DWITH_LASTFM=0 -DWITH_FFMPEGTHUMBNAILER=1 -DWITH_INOTIFY=1`
+  cmake -g DEB ../gerbera -DWITH_NPUPNP=YES -DWITH_JS=1 -DWITH_MYSQL=1 -DWITH_CURL=1 -DWITH_TAGLIB=1 -DWITH_MAGIC=1 -DWITH_MATROSKA=0 -DWITH_AVCODEC=1 -DWITH_EXIF=1 -DWITH_EXIV2=0 -DWITH_LASTFM=0 -DWITH_FFMPEGTHUMBNAILER=1 -DWITH_INOTIFY=1
 
 Resolve any dependency issues now!
 
@@ -247,31 +247,31 @@ Resolve any dependency issues now!
 
 8. `cpack -G DEB` will create a debian package file - All being well - no errors. Use dpkg to install.
 
-9. follow the gerbera manual for installation. Create the gerbera user (give the user a home directory e.g. /home/gerbera). Make the /etc/gerbera folder and get the config.xml. Symbolic link the config file:
+9. follow the gerbera manual for installation. Create the gerbera user (give the user a home directory e.g. /home/gerbera). Make the /etc/gerbera folder and get the config.xml. Symbolic link the config file::
 
-`ln -s /etc/gerbera/config.xml /home/gerbera/.config/gerbera`
+  ln -s /etc/gerbera/config.xml /home/gerbera/.config/gerbera
 
-Symbolic link the web directory:
+Symbolic link the web directory::
 
-`ln -s /usr/share/gerbera /usr/local/share`
+  ln -s /usr/share/gerbera /usr/local/share
 
-10. Edit `config.xml` and change the path to
+10. Edit `config.xml` and change the path to::
 
-`<home>/home/gerbera/.config/gerbera</home>`
+  <home>/home/gerbera/.config/gerbera</home>
 
-11. Start gerbera with the standard launch command. The server should start - watch the messages for errors. Check the web interface functions too. when happy that all is good - control-c to get back to shell
+11. Start gerbera with the standard launch command. The server should start - watch the messages for errors. Check the web interface functions too. when happy that all is good - control-c to get back to shell::
 
-`gerbera -c /etc/gerbera/config.xml`
+  gerbera -c /etc/gerbera/config.xml
 
-12. For SystemD users, copy the gerbera.service script into /usr/systemd/system and edit it to correct the path to the gerbera server the use the systemctl command as per the manual to start and stop the server and debug any problems.
+12. For SystemD users, copy the gerbera.service script into /usr/systemd/system and edit it to correct the path to the gerbera server the use the systemctl command as per the manual to start and stop the server and debug any problems.::
 
-`ExecStart=/usr/bin/gerbera -c /etc/gerbera/config.xml`
+  ExecStart=/usr/bin/gerbera -c /etc/gerbera/config.xml
 
 13. For init.d users, you need a gerbera script which I took from the earlier version which is in the Debian APT library
 
-14. You need to put your new gerbera package on hold to prevent apt-get upgrade downgrading back to 1.1
+14. You need to put your new gerbera package on hold to prevent apt-get upgrade downgrading back to 1.1::
 
-`apt-mark hold gerbera`
+  apt-mark hold gerbera
 
 That should be everything you need. Gerbera version 1.6.4-185 build with this guide was running on a PogoPlug V2E02 and a V4 Pro quite happily using vlc and bubbleupnp as clients on to a fire stick and chromecast devices.
 
